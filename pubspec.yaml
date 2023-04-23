@@ -64,6 +64,7 @@ flutter:
   uses-material-design: true
   
   assets:
+    - assets/gif/
     - assets/images/
     - assets/images/pano6.jpg
     - assets/images/manav.jpg

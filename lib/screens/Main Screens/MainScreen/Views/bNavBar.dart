@@ -1,6 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
+import '../../../Other Pages/About_Us_Page/aboutus_withgm.dart';
+import '../../../Other Pages/Contact_Us/contact_us.dart';
 import '../../../Other Pages/Schedule_Page/views/ScrollViewSchedule.dart';
 import '../../test2.dart';
 
@@ -16,11 +18,9 @@ class _BNavBarState extends State<BNavBar> {
   late int _selectedIndex;
   static List<Widget> pages = <Widget>[
     const ScheduleScreen(),
-    const ScheduleScreen(),
-    // const PanoAndBottomNavBar(),
+    const ContactUs(),
     const CustomAppBar_and_Screen(),
-    // const PanoAndBottomNavBar(),
-    // const PanoAndBottomNavBar(),
+    const About_UGM(),
   ];
 
   Color changeColor(bool selected) {

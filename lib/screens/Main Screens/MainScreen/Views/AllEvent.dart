@@ -81,7 +81,7 @@ class _EventViewWidgetState extends State<EventViewWidget> {
               ),
             );
           },
-          itemCount: eventsPageController.nTechEvents.length,
+          itemCount: eventsPageController.nTechEventUrls.length,
         ),
       ),
     );

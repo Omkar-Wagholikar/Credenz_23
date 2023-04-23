@@ -16,10 +16,10 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   // late AnimationController _controller;
   late TabController tabController;
-  final eventsPageController = Get.put(EventsPageController());
   late PageController pageController;
   @override
   Widget build(BuildContext context) {
+    final eventsPageController = Get.put(EventsPageController());
     tabController = TabController(length: 2, vsync: this)
       ..addListener(() {
         print("Selected Tab: ${tabController.index}");
@@ -114,13 +114,13 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
               controller: tabController,
               children: [
                 EventViewWidget(
-                  events: eventsPageController.techEvents,
+                  events: eventsPageController.techEventUrls,
                   names: eventsPageController.techNames,
                   tags: eventsPageController.techTags,
                 ),
                 EventViewWidget(
                   names: eventsPageController.nTechNames,
-                  events: eventsPageController.nTechEvents,
+                  events: eventsPageController.nTechEventUrls,
                   tags: eventsPageController.ntechTags,
                 )
               ],

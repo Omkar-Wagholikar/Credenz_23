@@ -8,7 +8,7 @@ class GlassEventContainer extends StatelessWidget {
   final String name;
   final String event;
   final String tag;
-  GlassEventContainer(
+  const GlassEventContainer(
       {super.key,
       required this.angle,
       required this.event,
@@ -70,7 +70,7 @@ class GlassEventContainer extends StatelessWidget {
                     tag: tag,
                     child: Image.asset(
                       fit: BoxFit.contain,
-                      "assets/images/$event.png",
+                      event,
                     ),
                   ),
                 ),

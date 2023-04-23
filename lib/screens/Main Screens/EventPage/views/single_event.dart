@@ -8,7 +8,7 @@ class DashBoard extends StatefulWidget {
   final String name;
   final String event;
   final String tag;
-  DashBoard(
+  const DashBoard(
       {required this.event, required this.name, super.key, required this.tag});
 
   @override
@@ -212,27 +212,24 @@ class _DashBoardState extends State<DashBoard> with TickerProviderStateMixin {
                                 const SizedBox(
                                   width: 25,
                                 ),
-                                Container(
-                                  child: const Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Price',
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        'Rs. 40/-',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ],
-                                  ),
+                                const Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Price',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      'Rs. 40/-',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
                                     width: MediaQuery.of(context).size.width *
@@ -275,7 +272,7 @@ class _DashBoardState extends State<DashBoard> with TickerProviderStateMixin {
                   child: GlassImage(
                     blur: 0,
                     image: Image(
-                      image: AssetImage('assets/images/${widget.event}.png'),
+                      image: AssetImage(widget.event),
                       fit: BoxFit.contain,
                     ),
                   ),
