@@ -1,3 +1,4 @@
+import 'package:credenz_23/screens/Other%20Pages/Profile_And_Ticket/profile_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,13 @@ class _BNavBarState extends State<BNavBar> {
     const ScheduleScreen(),
     const ContactUs(),
     const CustomAppBar_and_Screen(),
-    const About_UGM(),
+    const AboutUGM(),
+    const ProfilePage(
+        username: "username",
+        emailid: "emailid",
+        phonenumber: "phonenumber",
+        techevents: 2,
+        nontechevents: 2)
   ];
 
   Color changeColor(bool selected) {

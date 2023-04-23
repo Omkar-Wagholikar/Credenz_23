@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import '../../../services/networking.dart';
 
 database db = database();
@@ -14,6 +13,23 @@ Map<String, String> imageUrls = {
   "B-PLAN": "assets/images/bplan.png",
   "ENIGMA": "assets/images/enigma.png",
   "WALL STREET": "assets/images/enigma.png"
+};
+// technical:
+// 	rc, clash, datawiz, web weaver, cretronix
+// non tech:
+// 	quiz, wallstreet, nth, b plan, enigma
+
+Map<String, bool> technical = {
+  "WEB WEAVER": true,
+  "CRETRONIX": true,
+  "DATAWIZ": true,
+  "CLASH": true,
+  "REVERSE CODING": true,
+  "QUIZ": false,
+  "NETWORK TREASURE HUNT": false,
+  "B-PLAN": false,
+  "ENIGMA": false,
+  "WALL STREET": false
 };
 
 class EventsPageController extends GetxController {
@@ -39,21 +55,21 @@ class EventsPageController extends GetxController {
   void fetchEvents() async {
     // await Future.delayed(Duration(seconds: 1));
     List<dynamic> allEvents = await db.getEvents();
+
     print("ALLEVENTS: ${allEvents.length}");
 
-    for (int i = 0; i < 5; i++) {
-      // if (allEvents[i]['type'] == 'technical') {
-      techEventUrls.add(imageUrls[allEvents[i]['heading']]!);
-      techNames.add(allEvents[i]['heading']);
-      techTags.add(allEvents[i]['heading']);
-      techDes.add(allEvents[i]['body']);
-      // }
-      // else {
-      nTechEventUrls.add(imageUrls[allEvents[i + 5]['heading']]!);
-      nTechNames.add(allEvents[i + 5]['heading']);
-      ntechTags.add(allEvents[i + 5]['heading']);
-      nTechDes.add(allEvents[i + 5]['body']);
-      // }
+    for (int i = 0; i < allEvents.length; i++) {
+      if (technical[allEvents[i]['heading']]!) {
+        techEventUrls.add(imageUrls[allEvents[i]['heading']]!);
+        techNames.add(allEvents[i]['heading']);
+        techTags.add(allEvents[i]['heading']);
+        techDes.add(allEvents[i]['body']);
+      } else {
+        nTechEventUrls.add(imageUrls[allEvents[i]['heading']]!);
+        nTechNames.add(allEvents[i]['heading']);
+        ntechTags.add(allEvents[i]['heading']);
+        nTechDes.add(allEvents[i]['body']);
+      }
     }
   }
 }

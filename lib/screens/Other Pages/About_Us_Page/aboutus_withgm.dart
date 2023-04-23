@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class About_UGM extends StatefulWidget {
-  const About_UGM({Key? key}) : super(key: key);
+class AboutUGM extends StatefulWidget {
+  const AboutUGM({Key? key}) : super(key: key);
 
   @override
-  State<About_UGM> createState() => _About_UGMState();
+  State<AboutUGM> createState() => _AboutUGMState();
 }
 
-class _About_UGMState extends State<About_UGM> {
+class _AboutUGMState extends State<AboutUGM> {
   // get child => null;
 
   @override
@@ -172,7 +172,7 @@ class _GlowingButtonState extends State<GlowingButton> {
     double screenHeight = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: () async {
-        var pressed = true;
+        // var pressed = true;
         await _launchUrl();
       },
       child: AnimatedContainer(

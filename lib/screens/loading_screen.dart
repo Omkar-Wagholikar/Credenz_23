@@ -1,7 +1,8 @@
 // Use This Screen for loading gif of start
 import 'package:credenz_23/screens/Main%20Screens/AppDrawer/appDrawer.dart';
 import 'package:credenz_23/screens/Other%20Pages/Privacy_Policy/privacy_policy.dart';
-import 'package:credenz_23/screens/Other%20Pages/Sponsors_Page/sponsers.dart';
+import 'package:credenz_23/screens/Other%20Pages/Profile_And_Ticket/profile_page.dart';
+// import 'package:credenz_23/screens/Other%20Pages/Sponsors_Page/sponsers.dart';
 import 'package:credenz_23/services/networking.dart';
 // import 'Main Screens/MainScreen/Views/PanoBNav.dart';
 import 'package:flutter/material.dart';
@@ -34,21 +35,28 @@ class _LoadingScreenState extends State<LoadingScreen> {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  database dt = database();
-                  // dt.register(
+                  database db = database();
+                  // db.register(
                   //   username: 'John',
-                  //   email: '12345',
+                  //   email: '12345@4.com',
                   //   phone: '1234567890',
                   //   first_name: '12345',
                   //   last_name: '12345',
-                  //   password: '12345',
+                  //   password: 'tT12345678',
                   //   senior: false,
                   //   institute: '12345',
                   //   context: context,
                   // );
-                  // dt.login(
+
+                  // db.login(
                   //     context: context, username: "t1", password: "tT12345678");
-                  dt.getEvents();
+
+                  db.getEvents();
+
+                  // db.profile(
+                  //     context: context, username: "t1", password: "tT12345678");
+                  // db.getHeaders(
+                  //     context: context, username: "t1", password: "tT12345678");
                 },
                 child: const Text("Test"),
               ),
@@ -56,7 +64,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Ping_Page()),
+                    MaterialPageRoute(builder: (context) => PingPage()),
                   );
                 },
                 child: const Text("Ping"),
@@ -65,7 +73,23 @@ class _LoadingScreenState extends State<LoadingScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const About_UGM()),
+                    MaterialPageRoute(
+                        builder: (context) => const ProfilePage(
+                              emailid: "test@gmail.com",
+                              nontechevents: 1,
+                              phonenumber: "1234567890",
+                              techevents: 4,
+                              username: "testUser",
+                            )),
+                  );
+                },
+                child: const Text("Profile"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AboutUGM()),
                   );
                 },
                 child: const Text("About Us"),

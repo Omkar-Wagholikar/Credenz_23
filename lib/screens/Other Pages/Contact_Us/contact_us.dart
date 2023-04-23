@@ -27,7 +27,7 @@ class _ContactUsState extends State<ContactUs> {
   @override
   Widget build(BuildContext context) {
     final fSize = MediaQuery.of(context).size.width > 600 ? 28.0 : 20.0;
-    final w = MediaQuery.of(context).size.width;
+    // final w = MediaQuery.of(context).size.width;
     final h = MediaQuery.of(context).size.height;
     return Scaffold(
       resizeToAvoidBottomInset: false,

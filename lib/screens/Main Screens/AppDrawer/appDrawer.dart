@@ -103,7 +103,7 @@ class MenuScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => About_UGM()),
+                      MaterialPageRoute(builder: (context) => AboutUGM()),
                     );
                   },
                 ),
@@ -115,7 +115,7 @@ class MenuScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Ping_Page()),
+                      MaterialPageRoute(builder: (context) => PingPage()),
                     );
                   },
                 ),

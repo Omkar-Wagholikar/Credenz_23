@@ -5,15 +5,15 @@ import 'package:random_text_reveal/random_text_reveal.dart';
 import 'package:url_launcher/url_launcher.dart';
 // import 'package:hover_effect/hover_effect.dart';
 
-class Ping_Page extends StatefulWidget {
+class PingPage extends StatefulWidget {
   bool pressed = false;
 
-  Ping_Page({super.key});
+  PingPage({super.key});
   @override
-  State<Ping_Page> createState() => _Ping_PageState();
+  State<PingPage> createState() => _PingPageState();
 }
 
-class _Ping_PageState extends State<Ping_Page> {
+class _PingPageState extends State<PingPage> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;

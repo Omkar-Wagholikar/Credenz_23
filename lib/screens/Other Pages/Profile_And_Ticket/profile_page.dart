@@ -6,10 +6,14 @@ import 'package:glassmorphism/glassmorphism.dart';
 import 'ticket.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 
-
-
-class profilepage extends StatefulWidget {
-  const profilepage({super.key, required this.username,required this.emailid,required this.phonenumber,required this.techevents,required this.nontechevents});
+class ProfilePage extends StatefulWidget {
+  const ProfilePage(
+      {super.key,
+      required this.username,
+      required this.emailid,
+      required this.phonenumber,
+      required this.techevents,
+      required this.nontechevents});
   final String username;
   final String emailid;
   final String phonenumber;
@@ -17,10 +21,10 @@ class profilepage extends StatefulWidget {
   final int nontechevents;
 
   @override
-  State<profilepage> createState() => _profilepageState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _profilepageState extends State<profilepage>
+class _ProfilePageState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -44,60 +48,66 @@ class _profilepageState extends State<profilepage>
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: const Text(
-          'PROFILE',
-          style: kHeading,
-        ),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          title: const Text(
+            'PROFILE',
+            style: kHeading,
+          ),
 
-        // backgroundColor: Colors.transparent,
-        centerTitle: true,
-        actions: [
-          IconButton(onPressed: () {
-            showMenu(
-                context: context,
-                position: RelativeRect.fromLTRB(screenwidth,0 , 0, 0),
-                items:[
-                  PopupMenuItem(child: Row(
-                    children: [
-                      const Icon(
-                        Icons.share,
-                        color: Colors.white,
-                      ),
-                      SizedBox(
-                        width: screenwidth*0.01,
-                      ),
-                      const Text('Share',
-                      style: kText,
-                      ),
+          // backgroundColor: Colors.transparent,
+          centerTitle: true,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  showMenu(
+                    context: context,
+                    position: RelativeRect.fromLTRB(screenwidth, 0, 0, 0),
+                    items: [
+                      PopupMenuItem(
+                          child: Row(
+                        children: [
+                          const Icon(
+                            Icons.share,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: screenwidth * 0.01,
+                          ),
+                          const Text(
+                            'Share',
+                            style: kText,
+                          ),
+                        ],
+                      )),
+                      PopupMenuItem(
+                          child: Row(
+                        children: [
+                          const Icon(
+                            Icons.feedback,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: screenwidth * 0.01,
+                          ),
+                          const Text(
+                            'Feedback',
+                            style: kText,
+                          ),
+                        ],
+                      ))
                     ],
-                  )),
-                  PopupMenuItem(child: Row(
-                    children: [
-                      const Icon(Icons.feedback,
-                      color: Colors.white,
-                      ),
-                      SizedBox(
-                        width: screenwidth * 0.01,
-                      ),
-                      const Text(
-                        'Feedback',
-                      style: kText,
-                      ),
-                    ],
-                  ))
-                ],
-              // shape: ,
-              color: const Color(0xFF0F0F1F),
-            );
-          }, icon: const Icon(Icons.more_vert)),
-        ]
-      ),
+                    // shape: ,
+                    color: const Color(0xFF0F0F1F),
+                  );
+                },
+                icon: const Icon(Icons.more_vert)),
+          ]),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/bg2.jpeg'), fit: BoxFit.fitHeight),
+              image: AssetImage('assets/images/bg2.jpeg'),
+              fit: BoxFit.fitHeight),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,11 +125,10 @@ class _profilepageState extends State<profilepage>
                   Container(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      gradient:
-                            RadialGradient(colors: [
-                            const Color(0xFF1D1D2F).withOpacity(1),
-                            const Color(0xFF0F0F1F).withOpacity(0.7),
-                          ]),
+                      gradient: RadialGradient(colors: [
+                        const Color(0xFF1D1D2F).withOpacity(1),
+                        const Color(0xFF0F0F1F).withOpacity(0.7),
+                      ]),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
@@ -129,7 +138,8 @@ class _profilepageState extends State<profilepage>
                       ],
                     ),
                     child: CircleAvatar(
-                      backgroundImage: const AssetImage('assets/images/icon2.png'),
+                      backgroundImage:
+                          const AssetImage('assets/images/icon2.png'),
                       radius: screenwidth * 0.08,
                       backgroundColor: Colors.transparent,
                     ),
@@ -176,11 +186,10 @@ class _profilepageState extends State<profilepage>
                   Text(
                     widget.emailid,
                     style: const TextStyle(
-                      fontFamily: 'Oxanium',
-                      fontSize: 18.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w300
-                    ),
+                        fontFamily: 'Oxanium',
+                        fontSize: 18.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300),
                   ),
                 ],
               ),
@@ -203,11 +212,10 @@ class _profilepageState extends State<profilepage>
                   Text(
                     widget.phonenumber,
                     style: const TextStyle(
-                      fontFamily: 'Oxanium',
-                      fontSize: 18.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w300
-                    ),
+                        fontFamily: 'Oxanium',
+                        fontSize: 18.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300),
                   ),
                 ],
               ),
@@ -223,8 +231,7 @@ class _profilepageState extends State<profilepage>
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Oxanium',
-                    color: Colors.white
-                ),
+                    color: Colors.white),
               ),
             ),
             SizedBox(
@@ -262,7 +269,6 @@ class _profilepageState extends State<profilepage>
                     padding: const EdgeInsets.only(
                         top: 12.0, left: 50.0, right: 50.0),
                     child: TabBar(
-
                         labelStyle: const TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.w700,
@@ -292,16 +298,26 @@ class _profilepageState extends State<profilepage>
                         shrinkWrap: true,
                         // physics: ScrollBehavior._bouncingPhysics,
                         itemCount: widget.techevents,
-                        itemBuilder: (BuildContext context,index){
-                        return const ticket(eventname: "event name",eventdate: "26/04/23",eventtime: "12:00 pm",eventlogo: "assets/datawizwhite.png",);
-                      },
+                        itemBuilder: (BuildContext context, index) {
+                          return const ticket(
+                            eventname: "event name",
+                            eventdate: "26/04/23",
+                            eventtime: "12:00 pm",
+                            eventlogo: "assets/datawizwhite.png",
+                          );
+                        },
                       ),
                       ListView.builder(
                         shrinkWrap: true,
                         // physics: ScrollBehavior._bouncingPhysics,
                         itemCount: widget.nontechevents,
-                        itemBuilder: (BuildContext context,index){
-                          return const ticket(eventname: eventname,eventdate: eventdate,eventtime: eventtime,eventlogo: eventlogo,);
+                        itemBuilder: (BuildContext context, index) {
+                          return const ticket(
+                            eventname: eventname,
+                            eventdate: eventdate,
+                            eventtime: eventtime,
+                            eventlogo: eventlogo,
+                          );
                         },
                       ),
                     ]),
