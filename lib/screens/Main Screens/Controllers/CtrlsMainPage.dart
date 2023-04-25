@@ -53,7 +53,6 @@ class EventsPageController extends GetxController {
   }
 
   void fetchEvents() async {
-    // await Future.delayed(Duration(seconds: 1));
     List<dynamic> allEvents = await db.getEvents();
 
     print("ALLEVENTS: ${allEvents.length}");

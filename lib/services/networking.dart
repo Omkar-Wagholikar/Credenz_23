@@ -1,10 +1,19 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/globals/widgets.dart';
 
 class database {
+  Future<SharedPreferences> prefs_ = SharedPreferences.getInstance();
+
+  Future<void> test() async {
+    // final SharedPreferences prefs = await prefs_;
+    // prefs.setString('access', 'test');
+    // print(prefs.getString("access"));
+  }
+
   Future<bool> register({
     required BuildContext context,
     required String username,
@@ -17,6 +26,8 @@ class database {
     required String institute,
   }) async {
     String headerString = '';
+    final SharedPreferences prefs = await prefs_;
+
     try {
       var url = Uri.https('api.credenz.in', '/api/register/');
 
@@ -35,6 +46,16 @@ class database {
 
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
+
+      try {
+        String token = jsonDecode(response.body)["access"];
+        prefs.setString('access', token);
+      } catch (e) {
+        String error = "Error in registeration";
+        print(error);
+        showSnackBar(context, error);
+      }
+
       if (response.statusCode != 200) {
         jsonDecode(response.body).forEach((key, value) {
           headerString += '$key:$value\n';
@@ -61,6 +82,7 @@ class database {
     String headerString = '';
     try {
       var url = Uri.https('api.credenz.in', '/api/login/');
+      final SharedPreferences prefs = await prefs_;
 
       Map<String, dynamic> body = {
         "username": username,
@@ -70,7 +92,10 @@ class database {
       var response = await http.post(url, body: body);
 
       print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
+      print('Response body: ${jsonDecode(response.body)["access"]}');
+
+      prefs.setString("access", jsonDecode(response.body)["access"]);
+
       if (response.statusCode != 200) {
         jsonDecode(response.body).forEach((key, value) {
           headerString += '$key:$value\n';
@@ -112,29 +137,16 @@ class database {
 
   Future<bool> profile({
     required BuildContext context,
-    required String username,
-    required String password,
   }) async {
     String headerString = '';
     try {
       var url = Uri.https('api.credenz.in', '/api/profile/');
 
-      Map<String, dynamic> body = {
-        "username": username,
-        "password": password,
-      };
-      // Map<String, String> headers = {
-      //   'Authorization':
-      //       'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgyODQyMTMxLCJqdGkiOiIyNDBjMzYyZGQwMTI0OGVjOWY5OTQzNzIzNmI3NDNmYSIsInVzZXJfaWQiOjV9.7eYPV4PXfrEJtxRtIXPbIxge5Zk99i6RjcdXExiR0xA',
-      // };
       Map<String, String> headers = {
-        "Authorization":
-            "Token ${await getHeaders(context: context, username: username, password: password)}",
-        "Authentication":
-            "Token ${await getHeaders(context: context, username: username, password: password)}",
+        "Authorization": "Bearer ${await getHeaders(context: context)}",
       };
 
-      var response = await http.post(url, body: body, headers: headers);
+      var response = await http.get(url, headers: headers);
 
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
@@ -145,7 +157,7 @@ class database {
         showSnackBar(context, headerString);
         return false;
       } else {
-        headerString = 'Login Successful';
+        headerString = 'Got Profile Details';
         showSnackBar(context, headerString);
         return true;
       }
@@ -158,37 +170,63 @@ class database {
 
   Future<String> getHeaders({
     required BuildContext context,
-    required String username,
-    required String password,
   }) async {
-    String headerString = '';
+    final SharedPreferences prefs = await prefs_;
     try {
-      var url = Uri.https('api.credenz.in', '/api/login/');
-
-      Map<String, dynamic> body = {
-        "username": username,
-        "password": password,
-      };
-
-      var response = await http.post(url, body: body);
-
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
-      if (response.statusCode != 200) {
-        jsonDecode(response.body).forEach((key, value) {
-          headerString += '$key:$value\n';
-        });
-        showSnackBar(context, headerString);
-        return "error";
+      String? token = prefs.getString("access");
+      if (token != null) {
+        return token;
       } else {
-        headerString = 'Login Successful';
-        showSnackBar(context, headerString);
-        return jsonDecode(response.body)["access"];
+        showSnackBar(context, "access token not found");
+        return "access token not found";
       }
     } catch (e) {
       print("error: ${e.toString()}");
       showSnackBar(context, e.toString());
       return e.toString();
+    }
+  }
+
+  Future<List<dynamic>> getOrders({required BuildContext context}) async {
+    var url = Uri.https('api.credenz.in', '/api/orders/');
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${await getHeaders(context: context)}",
+    };
+
+    var response = await http.get(url, headers: headers);
+    print(jsonDecode(response.body));
+    return jsonDecode(response.body) as List<dynamic>;
+  }
+
+  Future<void> placeOrders({
+    required BuildContext context,
+    required List<String> eventList,
+    required String transactionId,
+    required String amount,
+  }) async {
+    final SharedPreferences prefs = await prefs_;
+    String token = prefs.getString("access") ?? "";
+    try {
+      var url = Uri.https('api.credenz.in', '/api/placeorder/');
+
+      Map<String, dynamic> body = {
+        "event_list": eventList.toString(),
+        "transaction_id": transactionId,
+        "amount": amount,
+      };
+
+      Map<String, String> headers = {
+        "Authorization": "Bearer ${await getHeaders(context: context)}",
+      };
+
+      var response = await http.post(url, body: body, headers: headers);
+
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    } catch (e) {
+      print("error: ${e.toString()}");
+      showSnackBar(context, e.toString());
+      // return false;
     }
   }
 }

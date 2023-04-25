@@ -36,13 +36,23 @@ class _LoadingScreenState extends State<LoadingScreen> {
               ElevatedButton(
                 onPressed: () {
                   database db = database();
+                  db.placeOrders(
+                      context: context,
+                      eventList: ["eventList"],
+                      transactionId: "transactionId",
+                      amount: "1000");
+
+                  // db.test();
+
+                  // db.getOrders(context: context);
+
                   // db.register(
-                  //   username: 'John',
-                  //   email: '12345@4.com',
+                  //   username: 'John2',
+                  //   email: '123452@4.com',
                   //   phone: '1234567890',
                   //   first_name: '12345',
                   //   last_name: '12345',
-                  //   password: 'tT12345678',
+                  //   password: 'tT13456789',
                   //   senior: false,
                   //   institute: '12345',
                   //   context: context,
@@ -51,10 +61,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
                   // db.login(
                   //     context: context, username: "t1", password: "tT12345678");
 
-                  db.getEvents();
+                  // db.getEvents();
 
-                  // db.profile(
-                  //     context: context, username: "t1", password: "tT12345678");
+                  // db.profile(context: context);
+
                   // db.getHeaders(
                   //     context: context, username: "t1", password: "tT12345678");
                 },
